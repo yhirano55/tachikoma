@@ -78,7 +78,7 @@ module Tachikoma
     def bundler
       Dir.chdir("#{Tachikoma.repos_path}/#{@build_for}") do
         Bundler.with_clean_env do
-          sh(*['ruby', '-i', '-pe', '$_.gsub! /^ruby/, "#ruby"', 'Gemfile'])
+          sh(*['ruby', '-i', '-pe', %('$_.gsub! /^ruby/, "#ruby"'), 'Gemfile'])
           sh(*['git', 'config', 'user.name', @commiter_name])
           sh(*['git', 'config', 'user.email', @commiter_email])
           sh(*['git', 'checkout', '-b', "tachikoma/update-#{@readable_time}", @base_remote_branch])
